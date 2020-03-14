@@ -1,0 +1,46 @@
+﻿@model PagedList.IPagedList<Web_TraSua.Models.Entities.LoaiTraSua>
+@using PagedList.Mvc;
+
+<title> Thông Tin Các Loại Trà Sữa </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Quản Lý Loại Sản Phẩm</h2>
+
+<p>
+    <button onclick="location.href='@Url.Action("Create", "LoaiTraSua")';return false;">Create New</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Mã Loại")
+        </th>
+        <th>
+            @Html.Label("Tên Loại")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.maloai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenloai)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "LoaiTraSua", new { maloai = item.maloai, tenloai = item.tenloai })';return false;">Edit</button>
+                @*<button onclick="location.href='@Url.Action("Details", "LoaiTraSua", new { maloai = item.maloai, tenloai = item.tenloai })';return false;">Details</button>*@
+                <button onclick="location.href='@Url.Action("Delete", "LoaiTraSua", new { maloai = item.maloai, tenloai = item.tenloai })';return false;">Delete</button>
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

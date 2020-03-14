@@ -1,0 +1,128 @@
+﻿@model PagedList.IPagedList<Web_TraSua.Models.Entities.TraSua>
+@using PagedList.Mvc;
+<title> Trà Sữa </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Quản Lý Sản Phẩm </h2>
+
+<p>
+    <button onclick="location.href='@Url.Action("Create", "TraSua")';return false;">Create New</button>
+</p>
+
+@using (Html.BeginForm("Search", "TraSua"))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.Label("Tên Trà Sữa", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10" >
+            @Html.TextBox("txtTenSP","", htmlAttributes : new { @class = "form-control", @placeholder = "Nhập tên trà sữa . . . . . " })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Mã Loại", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("maloai", new SelectList(ViewBag.maloai, "tenloai", "tenloai"),"", htmlAttributes: new { @class = "form-control" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Giá từ", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBox("txtTuGia", "", htmlAttributes : new { @class = "form-control", @placeholder = "Nhập tìm từ giá . . . . . " , @type = "number" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Đến giá", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBox("txtDenGia", "", htmlAttributes : new { @class = "form-control", @placeholder = "Đến giá . . . . . " , @type = "number" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+    </div>
+
+</div>
+    }
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Mã Trà Sữa")
+                </th>
+                <th>
+                    @Html.Label("Mã Loại")
+                </th>
+                <th>
+                    @Html.Label("Tên Trà Sữa")
+                </th>
+                <th>
+                    @Html.Label("Hương vị")
+                </th>
+                <th>
+                    @Html.Label("Size")
+                </th>
+                <th>
+                    @Html.Label("Đơn Giá")
+                </th>
+                <th>
+                    @Html.Label("Ảnh")
+                </th>
+                <th>
+                    @Html.Label("Ghi Chú")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mats)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.maloai)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tents)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.huongvi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.size)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dongia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.anhts)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ghichu)
+                    </td>
+                    <td>
+                        <button class="btn btn-success" onclick="location.href='@Url.Action("Edit", "TraSua", new { mats = item.mats })';return false;">Edit</button>
+                        <button class="btn btn-info" onclick="location.href='@Url.Action("Details", "TraSua" , new { mats=item.mats })';return false;">Details</button>
+                        <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete", "TraSua", new { mats = item.mats })';return false;">Delete</button>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div>
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>

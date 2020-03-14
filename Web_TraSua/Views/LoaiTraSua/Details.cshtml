@@ -1,0 +1,36 @@
+﻿@model Web_TraSua.Models.LoaiTraSua
+
+<title> Chi Tiết Loại Trà Sữa </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LoaiTraSua</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.maloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maloai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tenloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenloai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { maloai = Model.maloai, tenloai = Model.tenloai }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

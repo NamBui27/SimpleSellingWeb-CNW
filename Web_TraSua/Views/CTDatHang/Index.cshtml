@@ -1,0 +1,75 @@
+﻿@model PagedList.IPagedList<Web_TraSua.Models.Entities.CTDatHang>
+@using PagedList.Mvc;
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Chi tiết đặt hàng</h2>
+
+@*<p>
+        <button onclick="location.href='@Url.Action("Create", "CTDatHang")';return false;">Create New</button>
+    </p>*@
+<table class="table">
+    <tr>
+           @*<th>
+                @Html.Label("Mã Chi tiết")
+            </th>*@
+            </th>
+            <th>
+                @Html.Label("Mã đặt hàng")
+            </th>
+            <th>
+                @Html.Label("Mã trà sữa")
+            </th>
+            <th>
+                @Html.Label("Số lượng")
+            </th>
+            <th>
+                @Html.Label("Đơn giá")
+            </th>
+            <th>
+                @Html.Label("Thành tiền")
+            </th>
+            <th></th>
+        </tr>
+
+        
+        @foreach (var item in Model)
+        {       
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.mactdh)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.madh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soluong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dongia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.thanhtien)
+                </td>
+                @*<td>
+                    <button onclick="location.href='@Url.Action("Edit", "CTDatHang", new { mactdh = item.mactdh })';return false;">Edit</button>
+                    <button onclick="location.href='@Url.Action("Details", "CTDatHang", new { mactdh = item.mactdh })';return false;">Details</button>
+                    <button onclick="location.href='@Url.Action("Delete", "CTDatHang", new { mactdh = item.mactdh })';return false;">Delete</button>
+
+                </td>*@
+    </tr>
+    }
+
+</table>
+<div>
+    <button type="button" class="btn btn-info" onclick="location.href='@Url.Action("Index", "DatHang")'">
+        <i class="fa fa-arrow-left"></i>
+    </button>
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

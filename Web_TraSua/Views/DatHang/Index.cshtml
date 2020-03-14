@@ -1,0 +1,61 @@
+﻿@model PagedList.IPagedList<Web_TraSua.Models.Entities.DatHang>
+    @using PagedList.Mvc;
+
+<title> Thông Tin Đặt Hàng </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh Sách Đặt Hàng</h2>
+@*
+<p>
+    <button onclick="location.href='@Url.Action("Create", "DatHang")';return false;">Create New</button>
+</p>
+*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Mã Đặt Hàng")
+        </th>
+        <th>
+            @Html.Label("Mã khách hàng")
+        </th>
+        <th>
+            @Html.Label("Trạng thái xử lý")
+        </th>
+        <th>
+            @Html.Label("Ngày tạo")
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.madh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.makh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngaytao)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "DatHang", new { madh = item.madh })';return false;">Edit</button>
+                <button onclick="location.href='@Url.Action("Details", "DatHang", new { madh = item.madh })';return false;">Details</button>
+                @*<button onclick="location.href='@Url.Action("Delete", "DatHang", new { madh = item.madh })';return false;">Delete</button>*@
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

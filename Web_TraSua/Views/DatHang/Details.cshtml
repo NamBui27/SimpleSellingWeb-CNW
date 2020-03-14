@@ -1,0 +1,52 @@
+﻿@model Web_TraSua.Models.Entities.DatHang
+
+<title> Chi Tiết Thông Tin Đặt Hàng </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DatHang</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.madh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.madh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.makh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.makh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaytao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaytao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { madh = Model.madh, makh = Model.makh, Note = Model.Note, ngaytao = Model.ngaytao }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

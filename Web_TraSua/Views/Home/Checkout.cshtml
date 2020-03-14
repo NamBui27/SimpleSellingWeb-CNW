@@ -1,0 +1,238 @@
+﻿@using Web_TraSua.Models.Entities;
+
+@{
+    <title>Trà Sữa ONLINE | Check Out</title>; 
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@{
+    ShoppingCart cart = (ShoppingCart)Session["cart"];
+    List<Item> lst = new List<Item>();
+    int total = 0;
+    double totalMoney = 0.0;
+
+    if (cart != null)
+    {
+        lst = cart.lst;
+        total = cart.GetTotal();
+        totalMoney = cart.GetTotalMoney();
+    }
+}
+
+
+<section class="checkout py-lg-4 py-md-3 py-sm-3 py-3">
+    <div class="container py-lg-5 py-md-4 py-sm-4 py-3">
+        <div class="shop_inner_inf">
+            <div class="privacy about">
+                <h3><span>Checkout</span></h3>
+                <div class="checkout-right">
+                    <h4>Your shopping cart contains: <span>@total Products</span></h4>
+                    <table class="timetable_sub" action="">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Product</th>
+                                <th width="200px">Quantity</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in lst)
+                            {
+                                <tr class="rem1">
+                                    <td class="invert">@item.id</td>
+                                    <td class="invert-image"><a href="single.html"><img src="~/Content/img/@item.image" alt=" " class="img-responsive"></a></td>
+                                    @using (Html.BeginForm("Update", "ShoppingCart", new { @id = item.id }))
+                                    {
+                                        <td class="invert" width="200px">
+                                            <div class="quantity">
+                                                <div class="quantity-select">
+                                                    @*<div class="entry value-minus">&nbsp;</div>*@
+                                                    <input type="number" size="10" class="entry value" value="@item.amount" min="1" step="1" name="Qty" id="Qty"></input>
+                                                    <p><button class="button" value="1" type="submit">Update</button></p>
+                                                    @*<div class="entry value-plus active">&nbsp;</div>*@
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="invert">@item.name</td>
+                                        <td class="invert">@cart.GetMoney(item) VNĐ</td>
+                                    }
+                                    <td class="invert">
+                                        <div class="rem">
+                                            <a href="/ShoppingCart/Remove/@item.id">
+                                                <div class="close1"> </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="checkout-left">
+                    <div class="col-md-4 checkout-left-basket">
+                        <h4>Continue to basket</h4>
+                        <ul>
+                            @foreach (var item in lst)
+                            {
+                                <li>@item.name <i>-</i> <span>@cart.GetMoney(item) VNĐ</span></li>
+
+                            }
+                            <li>Total Service Charges <i>-</i> <span>0 VNĐ</span></li>
+                            <li>Total <i>-</i> <span>@totalMoney VNĐ</span></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-8 address_form">
+                        <h4>Add a new Details</h4>
+                        <form action="InSertData" method="post" class="creditly-card-form agileinfo_form" enctype="multipart/form-data">
+                            <section class="creditly-wrapper wrapper">
+                                <div class="information-wrapper">
+                                    <div class="first-row form-group">
+                                        <div class="controls" id="billing_full_name_field">
+                                            <label class="control-label" for="billing_full_name">Full name: </label>
+                                            <input class="billing-address-name form-control" type="text" id="billing_full_name" name="billing_full_name" placeholder="Full name...">
+                                        </div>
+                                        <div class="card_number_grids">
+                                            <div class="card_number_grid_left" id="billing_phone_field">
+                                                <div class="controls">
+                                                    <label class="control-label" for="billing_phone">Mobile number:</label>
+                                                    <input class="form-control" type="text" id="billing_phone" name="billing_phone" placeholder="Mobile number...">
+                                                </div>
+                                            </div>
+                                            <div class="card_number_grid_right">
+                                                <div class="controls" id="billing_email_field">
+                                                    <label class="control-label" for="billing_email">Email: </label>
+                                                    <input class="form-control" type="text" id="billing_email" name="billing_email" placeholder="Email...">
+                                                </div>
+                                            </div>
+                                            <div class="clear"> </div>
+                                        </div>
+                                        <div class="controls" id="billing_address_2_field">
+                                            <label class="control-label" for="billing_address_2">Address: </label>
+                                            <input class="form-control" type="text" id="billing_address_2" name="billing_address_2" placeholder="Address...">
+                                        </div>
+                                        <div class="controls" id="billing_address_1_field>
+                                            <label class="control-label" for="billing_address_1">Address type: </label>
+                                            <select class="form-control option-w3ls" id="billing_address_1" name="billing_address_1">
+                                                <option>Office</option>
+                                                <option>Home</option>
+                                                <option>Commercial</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button class="submit check_out">Delivery to this Address</button>
+                                </div>
+                            </section>
+                        </form>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <!-- //top products -->
+    </div>
+</section>
+
+<!--js working-->
+<script src='~/Scripts/js/jquery-2.2.3.min.js'></script>
+<!--//js working-->
+<!-- cart-js -->
+<script src="~/Scripts/js/minicart.js"></script>
+<script>
+    toys.render();
+
+    toys.cart.on('toys_checkout', function (evt) {
+        var items, len, i;
+
+        if (this.subtotal() > 0) {
+            items = this.items();
+
+            for (i = 0, len = items.length; i < len; i++) { }
+        }
+    });
+</script>
+<!--// cart-js -->
+<!--quantity-->
+<script>
+    $('.value-plus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'),
+            newVal = parseInt(divUpd.text(), 10) + 1;
+        divUpd.text(newVal);
+    });
+
+    $('.value-minus').on('click', function () {
+        var divUpd = $(this).parent().find('.value'),
+            newVal = parseInt(divUpd.text(), 10) - 1;
+        if (newVal >= 1) divUpd.text(newVal);
+    });
+</script>
+<!--quantity-->
+<!--closed-->
+<script>
+    $(document).ready(function (c) {
+        $('.close1').on('click', function (c) {
+            $('.rem1').fadeOut('slow', function (c) {
+                $('.rem1').remove();
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function (c) {
+        $('.close2').on('click', function (c) {
+            $('.rem2').fadeOut('slow', function (c) {
+                $('.rem2').remove();
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function (c) {
+        $('.close3').on('click', function (c) {
+            $('.rem3').fadeOut('slow', function (c) {
+                $('.rem3').remove();
+            });
+        });
+    });
+</script>
+<!--//closed-->
+<!-- start-smoth-scrolling -->
+<script src="~/Scripts/js/move-top.js"></script>
+<script src="~/Scripts/js/easing.js"></script>
+<script>
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 900);
+        });
+    });
+</script>
+<!-- start-smoth-scrolling -->
+<!-- here stars scrolling icon -->
+<script>
+    $(document).ready(function () {
+
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+        };
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<!--bootstrap working-->
+<script src="~/Scripts/js/bootstrap.min.js"></script>
+<!-- //bootstrap working-->

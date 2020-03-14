@@ -1,0 +1,86 @@
+﻿@model Web_TraSua.Models.Entities.TraSua
+
+<title> Chi Tiết Trà Sữa </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TraSua</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.mats)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.maloai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.maloai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tents)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tents)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.huongvi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.huongvi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dongia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dongia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.anhts)
+
+            <p><img src="~/Content/img/@Model.anhts" /></p>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.anhts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ghichu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ghichu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { mats = Model.mats }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,76 @@
+﻿@model PagedList.IPagedList<Web_TraSua.Models.Entities.KhachHang>
+@using PagedList.Mvc;
+
+<title> Thông Tin Khách Hàng </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Quản Lý Khách Hàng</h2>
+
+<p>
+    <button onclick="location.href='@Url.Action("Create", "KhachHang")';return false;">Create New</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Mã Khách Hàng")
+        </th>
+        <th>
+            @Html.Label("Họ tên khách hàng")
+        </th>
+        <th>
+            @Html.Label("SĐT")
+        </th>
+        <th>
+            @Html.Label("Địa Chỉ")
+        </th>
+        <th>
+            @Html.Label("Email")
+        </th>
+        @*<th>
+            @Html.Label("Tài Khoản")
+        </th>
+        <th>
+            @Html.Label("Mật Khẩu")
+        </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.makh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hotenkh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sdt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.diachi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.taikhoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.matkhau)
+            </td>*@
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "KhachHang", new { makh = item.makh })';return false;">Edit</button>
+                <button onclick="location.href='@Url.Action("Details", "KhachHang", new { makh = item.makh, hotenkh = item.hotenkh, sdt = item.sdt, diachi = item.diachi, email = item.email, taikhoan = item.taikhoan })';return false;">Details</button>              
+                <button onclick="location.href='@Url.Action("Delete", "KhachHang", new { makh = item.makh })';return false;">Delete</button>
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>

@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+
+<div class="text-center">
+    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+</div>
+<form class="user" action="@Url.Action("CheckLogin","Admin")" method="POST">
+    <div class="form-group">
+        <input type="text" class="form-control form-control-user" name="us" aria-describedby="emailHelp" placeholder="Enter Address...">
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control form-control-user" name="mk" placeholder="Password">
+    </div>
+
+    @TempData["msg"]
+
+    <div class="form-group">
+        <div class="custom-control custom-checkbox small">
+            <input type="checkbox" class="custom-control-input" id="customCheck">
+            <label class="custom-control-label" for="customCheck">Remember Me</label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-user btn-block">
+        Login
+    </button>
+    <hr>
+
+</form>

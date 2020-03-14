@@ -1,0 +1,83 @@
+﻿@model Web_TraSua.Models.Entities.KhachHang
+
+<title> Xoá Khách Hàng </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>KhachHang</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.makh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.makh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotenkh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotenkh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sdt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sdt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diachi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diachi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.taikhoan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.taikhoan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.matkhau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.matkhau)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

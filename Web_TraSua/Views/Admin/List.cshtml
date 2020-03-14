@@ -1,0 +1,59 @@
+﻿@model PagedList.IPagedList<Web_TraSua.Models.Entities.NhanVien>
+@using PagedList.Mvc;
+
+<title> Thông Tin Người Dùng </title>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<h2>Quản Lý Người Dùng </h2>
+
+<p>
+    <button onclick="location.href='@Url.Action("Create", "Admin")';return false;">Create New</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Mã nhân viên")
+        </th>
+        <th>
+            @Html.Label("Tên nhân viên")
+        </th>
+        <th>
+            @Html.Label("Tài khoản")
+        </th>
+        <th>
+            @Html.Label("Mật khẩu")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.manv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tennv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.taikhoannv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.matkhaunv)
+            </td>
+            <td>
+                <button onclick="location.href='@Url.Action("Edit", "Admin", new { manv = item.manv })';return false;">Edit</button>
+                @*<button onclick="location.href='@Url.Action("Details", "Admin", new { /* id=item.PrimaryKey */ })';return false;">Details</button>*@
+                <button onclick="location.href='@Url.Action("Delete", "Admin", new { manv = item.manv })';return false;">Delete</button>
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("List", new { page }))
+</div>
